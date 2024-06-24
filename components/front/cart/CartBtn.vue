@@ -1,8 +1,7 @@
 <template>
   <v-btn outlined
-         color="primary"
          @click="addToCart()"
-         class="ml-4">
+         class="ml-4 custom__btn">
     <v-icon>mdi-cart</v-icon>
     Add to cart
   </v-btn>

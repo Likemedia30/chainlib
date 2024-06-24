@@ -1,6 +1,6 @@
 <template>
-  <div v-if="contract" class="cart-icon-area">
-    <div v-if="currentUser">
+  <div class="cart-icon-area">
+    <div>
       <nuxt-link :to="`/${language.lang}/cart`" v-if="cartLenght">
         <v-badge
             bordered

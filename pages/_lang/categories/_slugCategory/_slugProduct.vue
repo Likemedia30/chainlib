@@ -8,9 +8,9 @@
     <v-container>
       <v-row>
         <v-col class="col-12">
-          <div class="productOne mt-6">
+          <div class="productOne">
             <v-row class="justify-space-between">
-              <v-col class="col-lg-4 col-12">
+              <v-col class="col-lg-5 col-12">
                 <div>
                   <slider-one-product :images="product.images"
                                       @openZoom="openZoom"
@@ -18,46 +18,52 @@
                                       path="products"/>
                 </div>
               </v-col>
-              <v-col class="col-lg-8 col-12 book-property-area">
+
+              <v-col class="col-lg-7 col-12 book-property-area">
                 <h2 class="productOne__name">{{ product.translation.name }}</h2>
-                <p class="productOne__price mb-4" v-if="thing.length > 0">
-                  {{ parsePrice(thing) }}
-                  <!--                  {{ product.personal_price.price }}-->
-                  <!--                  <span v-if="product.personal_price.old_price > product.personal_price.price">/</span>-->
-                  <!--                  <span class="price__discount" v-if="product.personal_price.old_price > product.personal_price.price">-->
-                  <!--                  {{ product.personal_price.old_price }}-->
-                  <!--                </span>-->
-                  {{ currency.abbr }}
-                </p>
 
-                <!--                <near-buy></near-buy>-->
-
-                <!--                <v-btn outlined color="primary"-->
-                <!--                       :href="`https://www.mintbase.io/meta/${mainnnetId}/auction?tokenId=21`"-->
-                <!--                       target="_blank"-->
-                <!--                       class="mr-20">-->
-                <!--                  <v-icon>mdi-label</v-icon>-->
-                <!--                  Make Offer-->
-                <!--                </v-btn>-->
-
-                <v-btn outlined color="primary"
-                       :href="`https://mintbase.io/thing/${mainnnetId}`"
-                       target="_blank" class="ml-20">
-                  <v-icon>mdi-cart-variant</v-icon>
-                  Buy with near
-                </v-btn>
-
-                <span v-if="thing.length">
-                  <span v-if="currentUser.accountId === thing[0].tokens[0].ownerId">
-                    <CartBtn :product="product" v-if="currentUser"></CartBtn>
-                  </span>
-                </span>
-
-
-                <!--                <sizes :product="product" v-if="product.subproducts.length"/>-->
-                <!--                <div class="mt-4" v-else>-->
-                <!--                  <near-buy-sub-product-btn :product="product"></near-buy-sub-product-btn>-->
-                <!--                </div>-->
+                <div id="half-stars">
+                  <div class="rating-group">
+                    <input class="rating__input rating__input--none" checked name="rating2" id="rating2-0" value="0"
+                           type="radio">
+                    <label aria-label="0 stars" class="rating__label" for="rating2-0">&nbsp;</label>
+                    <label aria-label="0.5 stars" class="rating__label rating__label--half" for="rating2-05"><i
+                        class="rating__icon rating__icon--star fa fa-star-half"></i></label>
+                    <input class="rating__input" name="rating2" id="rating2-05" value="0.5" type="radio">
+                    <label aria-label="1 star" class="rating__label" for="rating2-10"><i
+                        class="rating__icon rating__icon--star fa fa-star"></i></label>
+                    <input class="rating__input" name="rating2" id="rating2-10" value="1" type="radio">
+                    <label aria-label="1.5 stars" class="rating__label rating__label--half" for="rating2-15"><i
+                        class="rating__icon rating__icon--star fa fa-star-half"></i></label>
+                    <input class="rating__input" name="rating2" id="rating2-15" value="1.5" type="radio">
+                    <label aria-label="2 stars" class="rating__label" for="rating2-20"><i
+                        class="rating__icon rating__icon--star fa fa-star"></i></label>
+                    <input class="rating__input" name="rating2" id="rating2-20" value="2" type="radio">
+                    <label aria-label="2.5 stars" class="rating__label rating__label--half" for="rating2-25"><i
+                        class="rating__icon rating__icon--star fa fa-star-half"></i></label>
+                    <input class="rating__input" name="rating2" id="rating2-25" value="2.5" type="radio">
+                    <label aria-label="3 stars" class="rating__label" for="rating2-30"><i
+                        class="rating__icon rating__icon--star fa fa-star"></i></label>
+                    <input class="rating__input" name="rating2" id="rating2-30" value="3" type="radio">
+                    <label aria-label="3.5 stars" class="rating__label rating__label--half" for="rating2-35"><i
+                        class="rating__icon rating__icon--star fa fa-star-half"></i></label>
+                    <input class="rating__input" name="rating2" id="rating2-35" value="3.5" type="radio"
+                           :checked="product.id % 2 == 1">
+                    <label aria-label="4 stars" class="rating__label" for="rating2-40"><i
+                        class="rating__icon rating__icon--star fa fa-star"></i></label>
+                    <input class="rating__input" name="rating2" id="rating2-40" value="4" type="radio">
+                    <label aria-label="4.5 stars" class="rating__label rating__label--half" for="rating2-45"><i
+                        class="rating__icon rating__icon--star fa fa-star-half"></i></label>
+                    <input class="rating__input" name="rating2" id="rating2-45" value="4.5" type="radio"
+                           :checked="product.id % 2 == 0">
+                    <label aria-label="5 stars" class="rating__label" for="rating2-50"><i
+                        class="rating__icon rating__icon--star fa fa-star"></i></label>
+                    <input class="rating__input" name="rating2" id="rating2-50" value="5" type="radio">
+                  </div>
+                  <p class="stars-description" style="font-family: sans-serif; font-size:0.9rem">
+                    {{ randomIntFromInterval(2, product.id) }} votes
+                  </p>
+                </div>
 
                 <v-expansion-panels focusable
                                     v-model="panel"
@@ -89,9 +95,32 @@
                 </v-expansion-panels>
 
               </v-col>
+
               <v-col class="col-lg-12 col-12" v-if="product.translation.body">
                 <about-area :text="product.translation.body"></about-area>
               </v-col>
+
+              <v-col class="text-center">
+                <p class="productOne__price mb-4" v-if="thing.length > 0">
+                  {{ parsePrice(thing) }}
+                  {{ currency.abbr }}
+                </p>
+
+                <v-btn
+                       :href="`https://mintbase.io/thing/${mainnnetId}`"
+                       target="_blank" class="ml-20 custom__btn">
+                  <v-icon>mdi-cart-variant</v-icon>
+                  Buy with near
+                </v-btn>
+
+                <span v-if="thing.length && product.homewear">
+                  <span>
+                    <CartBtn :product="product"></CartBtn>
+                  </span>
+                </span>
+
+              </v-col>
+
             </v-row>
           </div>
         </v-col>
@@ -263,6 +292,9 @@ export default {
     });
   },
   methods: {
+    randomIntFromInterval(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min)
+    },
     parsePrice(thing) {
       if (thing.length > 0) {
         if (thing[0].tokens.length > 0) {
@@ -288,7 +320,8 @@ export default {
       }
 
       return 0;
-    },
+    }
+    ,
     updateOffers() {
       const data = {
         productId: this.product.id,
@@ -368,6 +401,12 @@ export default {
 }
 
 .productOne {
+  margin-top: -50px;
+  padding: 30px 15px;
+  background-color: #FFF;
+  position: relative;
+  z-index: 2;
+
   &__name {
     font-family: $font-titles;
     font-size: 30px;
@@ -383,10 +422,10 @@ export default {
   &__price {
     margin-top: 10px;
     text-transform: uppercase;
-    font-size: 18px;
+    font-size: 26px;
     font-family: $font-roboto;
-    font-weight: 400;
-    color: $main-color;
+    font-weight: 600;
+    color: #e96535;
   }
 
   &__discount {
@@ -677,5 +716,77 @@ export default {
 
 .book-property-area {
   padding: 0 30px;
+}
+
+#half-stars {
+  margin-left: -20px;
+
+  .rating-group {
+    display: inline-flex;
+  }
+
+  .rating__icon {
+    pointer-events: none;
+  }
+
+  .rating__input {
+    position: absolute !important;
+    left: -9999px !important;
+  }
+
+  .rating__label {
+    cursor: pointer;
+    padding: 0 0.1em;
+    font-size: 2rem;
+  }
+
+  .rating__label--half {
+    padding-right: 0;
+    margin-right: -0.6em;
+    z-index: 2;
+  }
+
+  .rating__icon--star {
+    color: orange;
+  }
+
+  .rating__icon--none {
+    color: #eee;
+  }
+
+  .rating__input--none:checked + .rating__label .rating__icon--none {
+    color: red;
+  }
+
+  .rating__input:checked ~ .rating__label .rating__icon--star {
+    color: #ddd;
+  }
+
+  .rating-group:hover .rating__label .rating__icon--star,
+  .rating-group:hover .rating__label--half .rating__icon--star {
+    color: orange;
+  }
+
+  .rating__input:hover ~ .rating__label .rating__icon--star,
+  .rating__input:hover ~ .rating__label--half .rating__icon--star {
+    color: #ddd;
+  }
+
+  .rating-group:hover .rating__input--none:not(:hover) + .rating__label .rating__icon--none {
+    color: #eee;
+  }
+
+  .rating__input--none:hover + .rating__label .rating__icon--none {
+    color: red;
+  }
+}
+
+.stars-description {
+  margin-left: 20px;
+}
+.custom__btn {
+  background-color: #e96535 !important;
+  color: #FFF !important;
+  font-weight: 600;
 }
 </style>

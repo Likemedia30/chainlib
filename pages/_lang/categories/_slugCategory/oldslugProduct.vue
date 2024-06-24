@@ -14,7 +14,8 @@
             <v-col class="col-lg-6 col-12">
               <p class="productOne__name">{{ product.translation.name }}</p>
               <p class="productOne__by" v-if="product.brand">by {{ product.brand.translation.name }}</p>
-              <p class="productOne__price">
+
+              <p class="productOne__name">
                 {{ product.personal_price.price }}
                 <span v-if="product.personal_price.old_price > product.personal_price.price">/</span>
                 <span class="price__discount" v-if="product.personal_price.old_price > product.personal_price.price">
@@ -264,7 +265,7 @@ export default {
   &__price {
     margin-top: 10px;
     text-transform: uppercase;
-    font-size: 18px;
+    font-size: 22px;
     font-family: $font-roboto;
     font-weight: 400;
     color: $main-color;
@@ -275,7 +276,6 @@ export default {
     right: 0;
     width: 100px;
     height: 100px;
-    // background-image: url("./static/discountIcon.png");
     background-size: 110%;
     background-position: center center;
     font-family: $font-text-bold;
@@ -370,7 +370,6 @@ export default {
   }
 }
 .p-title {
-  text-align: left;
   color: $main-color;
   font-family: $font-titles;
   font-size: 25px;
@@ -500,5 +499,8 @@ export default {
 }
 .v-expansion-panel-header {
   max-width: 100% !important;
+}
+.productOne__price {
+  font-size: 30px !important;
 }
 </style>
